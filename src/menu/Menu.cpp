@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include <Arduino.h>
 #include <menu/MenuPoint.h>
+#include <iostream>
 
 void Menu::addEntry(MenuPoint *p) {
     p->setParent(this);
@@ -37,9 +38,14 @@ void Menu::processInput(Joystick *joystick) {
     if (currentMenu != 0) {
         currentMenu->processInput(joystick);
     } else {
-        selected += joystick->getScrollY();
-        selected = selected < 0 ? 0 : (selected > menuPoints.size() - 1 ? menuPoints.size() - 1 : selected);
-
+        if(joystick->pressed()){
+            std::cout << "Pressed"<<std::endl;
+            history.push_back(menuPoints[selected]);
+            currentMenu = menuPoints[selected];
+        }else{
+            selected += joystick->getScrollY();
+            selected = selected < 0 ? 0 : (selected > menuPoints.size() - 1 ? menuPoints.size() - 1 : selected);
+        }
     }
 }
 

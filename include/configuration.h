@@ -5,7 +5,7 @@
  * Joy: 5V
  *  X -> 32
  *  Y -> 33
- *  SW -> 34
+ *  SW -> 26
  *
  * SD: 5V
  *  CS -> 5 (SS)
@@ -34,7 +34,7 @@
 //JOYSTICK
 #define JOY_X 32
 #define JOY_Y 33
-#define JOY_SW 34
+#define JOY_SW 26
 
 //Ignore in this range (+-value)
 #define JOY_X_DEADZONE 0.2

@@ -9,7 +9,6 @@ class MenuPoint;
 class Menu{
     std::vector<MenuPoint*> menuPoints;
     MenuPoint* currentMenu = 0;
-    MenuPoint* parentMenu = 0;
     std::vector<MenuPoint*> history;
     int selected = 0;
 public:

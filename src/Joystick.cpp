@@ -1,5 +1,6 @@
 #include "Joystick.h"
 #include <Arduino.h>
+#include <iostream>
 #include "configuration.h"
 
 float Joystick::getX() {
@@ -32,10 +33,11 @@ void Joystick::update() {
     float x = analogRead(JOY_X) / 2048.0f - 1.0f;
     float y = analogRead(JOY_Y) / 2048.0f - 1.0f;
 
-    bool pressed = digitalRead(JOY_SW);
-    if (pressed) {
+    int pressed = analogRead(JOY_SW);
+    std::cout<<"input "<<pressed<<std::endl;
+    if (pressed == 0) {
         if (!swBlock) {
-            swPressed = pressed;
+            swPressed = pressed == 0;
             swBlock = true;
         }
     } else {
@@ -66,5 +68,6 @@ void Joystick::update() {
 Joystick::Joystick() {
     pinMode(JOY_X, INPUT);
     pinMode(JOY_Y, INPUT);
-    pinMode(JOY_SW, INPUT);
+    pinMode(JOY_SW, INPUT_PULLUP);
+    digitalWrite(JOY_SW, HIGH);
 }

@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Menu.h>
 #include <Joystick.h>
-
+#include "menu/MenuPoint.h"
 Menu *menu;
 Joystick *joystick;
 Display *display;
