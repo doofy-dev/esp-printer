@@ -30,3 +30,15 @@ void Display::string(int x, int y, String data) {
 void Display::rect(int x, int y, int width, int height) {
     display->fillRect(x, y, width, height);
 }
+
+void Display::addLine(DisplayString *line) {
+    lines.push_back(line);
+}
+
+void Display::empty() {
+    for(auto line : lines){
+        delete(line);
+    }
+
+    lines.clear();
+}

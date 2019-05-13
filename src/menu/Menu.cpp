@@ -9,11 +9,12 @@ void Menu::addEntry(MenuPoint *p) {
     menuPoints.push_back(p);
 }
 
-Menu::Menu() {
+Menu::Menu(Display *d) {
     selected = 0;
+    display=d;
 }
 
-void Menu::draw(Display *display) {
+void Menu::draw() {
     if (currentMenu != 0) {
         currentMenu->draw(display);
     } else {
@@ -38,11 +39,11 @@ void Menu::processInput(Joystick *joystick) {
     if (currentMenu != 0) {
         currentMenu->processInput(joystick);
     } else {
-        if(joystick->pressed()){
-            std::cout << "Pressed"<<std::endl;
+        if (joystick->pressed()) {
+            std::cout << "Pressed" << std::endl;
             history.push_back(menuPoints[selected]);
             currentMenu = menuPoints[selected];
-        }else{
+        } else {
             selected += joystick->getScrollY();
             selected = selected < 0 ? 0 : (selected > menuPoints.size() - 1 ? menuPoints.size() - 1 : selected);
         }
@@ -53,5 +54,10 @@ void Menu::back() {
     if (history.size() > 1) {
         history.pop_back();
         currentMenu = history[history.size() - 1];
+        display->empty();
+    } else {
+        currentMenu = 0;
+        history.clear();
+        display->empty();
     }
 }

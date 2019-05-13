@@ -33,8 +33,7 @@ void Joystick::update() {
     float x = analogRead(JOY_X) / 2048.0f - 1.0f;
     float y = analogRead(JOY_Y) / 2048.0f - 1.0f;
 
-    int pressed = analogRead(JOY_SW);
-    std::cout<<"input "<<pressed<<std::endl;
+    int pressed = digitalRead(JOY_SW);
     if (pressed == 0) {
         if (!swBlock) {
             swPressed = pressed == 0;
@@ -68,6 +67,7 @@ void Joystick::update() {
 Joystick::Joystick() {
     pinMode(JOY_X, INPUT);
     pinMode(JOY_Y, INPUT);
+//    pinMode(JOY_SW, INPUT);
     pinMode(JOY_SW, INPUT_PULLUP);
     digitalWrite(JOY_SW, HIGH);
 }

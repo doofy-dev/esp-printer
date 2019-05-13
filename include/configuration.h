@@ -26,6 +26,8 @@
 #define DISPLAY_ADDRESS 0x3c
 #define DISPLAY_SDA 22
 #define DISPLAY_SCL 21
+#define DISPLAY_WIDTH 320
+#define DISPLAY_HEIGHT 64
 
 //BME280 MicroSD card reader
 #define SD_ADDRESS 0x76

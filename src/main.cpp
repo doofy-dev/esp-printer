@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <Menu.h>
 #include <Joystick.h>
+#include <menu/About.h>
 #include "menu/MenuPoint.h"
 Menu *menu;
 Joystick *joystick;
@@ -17,12 +18,12 @@ void setup() {
     joystick = new Joystick;
     display = static_cast<Display *>(Display::getInstance());
     display->init();
-    menu = new Menu;
+    menu = new Menu(display);
     menu->addEntry(new MenuPoint("Printer"));
     menu->addEntry(new MenuPoint("Files"));
     menu->addEntry(new MenuPoint("WiFi"));
     menu->addEntry(new MenuPoint("Tools"));
-    menu->addEntry(new MenuPoint("About"));
+    menu->addEntry(new About());
 }
 
 /*
@@ -62,6 +63,6 @@ void loop() {
     joystick->update();
     display->clear();
     menu->processInput(joystick);
-    menu->draw(display);
+    menu->draw();
     display->draw();
 }

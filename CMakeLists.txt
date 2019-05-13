@@ -15,4 +15,4 @@ add_custom_target(
 )
 
 
-add_executable(${PROJECT_NAME} ${SRC_LIST} src/main.cpp include/configuration.h include/Display.h include/Singleton.h src/Singleton.cpp include/Menu.h include/menu/MenuPoint.h src/Display.cpp src/menu/Menu.cpp include/Joystick.h src/Joystick.cpp include/menu/About.h src/menu/About.cpp)
+add_executable(${PROJECT_NAME} ${SRC_LIST} src/main.cpp include/configuration.h include/Display.h include/Singleton.h src/Singleton.cpp include/Menu.h include/menu/MenuPoint.h src/Display.cpp src/menu/Menu.cpp include/Joystick.h src/Joystick.cpp include/menu/About.h src/menu/About.cpp include/DisplayString.h src/DisplayString.cpp)

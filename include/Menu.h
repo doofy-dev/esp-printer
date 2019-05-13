@@ -9,11 +9,12 @@ class MenuPoint;
 class Menu{
     std::vector<MenuPoint*> menuPoints;
     MenuPoint* currentMenu = 0;
+    Display *display;
     std::vector<MenuPoint*> history;
     int selected = 0;
 public:
-    Menu();
-    virtual void draw(Display *display);
+    Menu(Display *display);
+    virtual void draw();
     virtual void processInput(Joystick *joystick);
     void addEntry(MenuPoint *p);
     void back();
