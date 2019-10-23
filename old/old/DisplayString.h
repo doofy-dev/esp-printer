@@ -2,6 +2,7 @@
 #include "configuration.h"
 #include "Display.h"
 #include <Arduino.h>
+#include <OLEDDisplayUi.h>
 
 struct DisplayString{
     int maxwidth;
@@ -11,5 +12,5 @@ struct DisplayString{
 
     DisplayString(String data, int maxWidth);
 
-    String getText();
+    String getText(OLEDDisplay &display);
 };

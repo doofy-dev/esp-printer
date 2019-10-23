@@ -1,33 +1,32 @@
 #pragma once
 
-#include "Singleton.h"
-
-#include <Wire.h>
-
-#include <SSD1306Wire.h>
-#include <OLEDDisplayUi.h>
 #include <vector>
+#include <OLEDDisplayUi.h>
+#include <SSD1306Wire.h>
 
-#include "configuration.h"
-#include "DisplayString.h"
+class Drawable;
+class Display{
+    int cursorX, cursorY;
+    int scrollX, scrollY;
+    int contentHeight = 0;
+    int contentWidht = 0;
+    bool isNav= false;
+    std::vector<Drawable *> items;
+    std::vector<Drawable *> nav;
+    Drawable *active;
 
-class Display : public Singleton{
-private:
+
     OLEDDisplayUi *ui;
     SSD1306Wire *display;
-    std::vector<DisplayString *> lines;
-protected:
-    Display();
 public:
-    void clear();
+    Display();
+    void resetCursor();
+    void findActive();
+    void insertItem(Drawable *d);
+    void clearItems();
     void draw();
-    void init();
-    void addLine(DisplayString *line);
-    void empty();
-
-    void string(int x, int y, String data);
-
-    void rect(int x, int y, int width, int height);
-
-    void switchColor();
+    void drawScrollBar();
+    void drawText(String text, int x, int y);
+    void drawRect(int x, int y, int w, int h);
+    int stringWidth(String text);
 };

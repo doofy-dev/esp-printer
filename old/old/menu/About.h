@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MenuPoint.h"
-#include "../Display.h"
+#include "old/Display.h"
 
 class About : public MenuPoint{
 public:

@@ -1,5 +1,5 @@
 #include <configuration.h>
-#include "Menu.h"
+#include "old/Menu.h"
 #include <Arduino.h>
 #include <menu/MenuPoint.h>
 #include <iostream>
@@ -56,8 +56,12 @@ void Menu::back() {
         currentMenu = history[history.size() - 1];
         display->empty();
     } else {
-        currentMenu = 0;
+        currentMenu = home;
         history.clear();
         display->empty();
     }
+}
+
+void Menu::setHome(MenuPoint *p) {
+    home = p;
 }

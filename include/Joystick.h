@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "Singleton.h"
+#include "old/Singleton.h"
 
 class Joystick {
 private:

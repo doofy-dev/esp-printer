@@ -1,11 +1,8 @@
 #include <Wire.h>  // Only needed for Arduino 1.6.5 and earlier
 #include <SPI.h>
-#include "Display.h"
 #include <Arduino.h>
-#include <Menu.h>
 #include <Joystick.h>
-#include <menu/About.h>
-#include "menu/MenuPoint.h"
+
 Menu *menu;
 Joystick *joystick;
 Display *display;
