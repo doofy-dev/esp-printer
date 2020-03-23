@@ -1,30 +1,30 @@
 #pragma once
 
+#include "IClass.h"
 
-#include "Singleton.h"
-
-class Joystick {
+class Joystick : public IClass{
 private:
-    float prevX = 0;
-    float prevY = 0;
+    int mX=0;
+    int mY=0;
+    int mDX=0;
+    int mDY=0;
+    bool mClick = false;
+    bool mPress = false;
+    bool mDown = false;
+    bool mRelease = false;
+    double mLastScroll = 0;
 
-    float dX, dY;
-    bool swPressed = false;
-    bool swBlock = false;
-    double lastScroll = 0;
-    int scrollX, scrollY;
 public:
-    float getX();
-
-    float getY();
-
-    void update();
-
-    int getScrollX();
-
-    int getScrollY();
-
-    bool pressed();
-
     Joystick();
+    void update() override;
+
+    int x(){ return mX;}
+    int y(){ return mY;}
+    int dX(){ return mDX;}
+    int dY(){ return mDY;}
+
+    bool isPressed(){ return mPress;}
+    bool isClick();
+    bool isDown(){ return mDown;}
+    bool isRelease(){ return mRelease;}
 };

@@ -10,9 +10,9 @@ add_custom_target(
 )
 add_custom_target(
     PLATFORMIO_BUILD_AND_UPLOAD ALL
-    COMMAND ${PLATFORMIO_CMD} -f -c clion run --target upload --upload-port=com5
+    COMMAND ${PLATFORMIO_CMD} -f -c clion run --target upload
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 
-add_executable(${PROJECT_NAME} ${SRC_LIST} src/main.cpp include/configuration.h include/Display.h include/Singleton.h src/Singleton.cpp include/Menu.h include/menu/MenuPoint.h src/Display.cpp src/menu/Menu.cpp include/Joystick.h src/Joystick.cpp include/menu/About.h src/menu/About.cpp include/DisplayString.h src/DisplayString.cpp)
+add_executable(${PROJECT_NAME} ${SRC_LIST} src/main.cpp include/IClass.h include/Joystick.h src/Joystick.cpp include/Display.h src/Display.cpp include/Page.h src/Page.cpp include/pages/HomePage.h src/pages/HomePage.cpp include/pages/Menu.h src/pages/Menu.cpp)

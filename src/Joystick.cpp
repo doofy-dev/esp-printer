@@ -1,68 +1,8 @@
+#include <configuration.h>
 #include "Joystick.h"
 #include <Arduino.h>
-#include <iostream>
-#include "configuration.h"
 
-float Joystick::getX() {
-    return dX;
-}
-
-int Joystick::getScrollX() {
-    int val = scrollX;
-    scrollX = 0;
-    return val;
-}
-
-float Joystick::getY() {
-    return dY;
-}
-
-int Joystick::getScrollY() {
-    int val = scrollY;
-    scrollY = 0;
-    return val;
-}
-
-bool Joystick::pressed() {
-    bool p = swPressed;
-    swPressed = false;
-    return p;
-}
-
-void Joystick::update() {
-    float x = analogRead(JOY_X) / 2048.0f - 1.0f;
-    float y = analogRead(JOY_Y) / 2048.0f - 1.0f;
-
-    int pressed = digitalRead(JOY_SW);
-    if (pressed == 0) {
-        if (!swBlock) {
-            swPressed = pressed == 0;
-            swBlock = true;
-        }
-    } else {
-        swPressed = false;
-        swBlock = false;
-    }
-    if (std::abs(x) > JOY_X_DEADZONE) {
-        dX = x;
-    } else {
-        dX = 0;
-    }
-    if (std::abs(y) > JOY_Y_DEADZONE) {
-        dY = y;
-    } else {
-        dY = 0;
-    }
-
-    double s = millis();
-
-    if ((std::abs(dX) >= JOY_X_MIN_TO_SCROLL || std::abs(dY) >= JOY_Y_MIN_TO_SCROLL) &&
-        (s - lastScroll > MENU_RESPONSIVENESS_MS)) {
-        scrollX = (dX > 0 ? 1 : -1);
-        scrollY = (dY > 0 ? 1 : -1);
-        lastScroll = s;
-    }
-}
+#include <cmath>
 
 Joystick::Joystick() {
     pinMode(JOY_X, INPUT);
@@ -70,4 +10,62 @@ Joystick::Joystick() {
 //    pinMode(JOY_SW, INPUT);
     pinMode(JOY_SW, INPUT_PULLUP);
     digitalWrite(JOY_SW, HIGH);
+}
+
+void Joystick::update() {
+    IClass::update();
+    float x = analogRead(JOY_X) / 2048.0f - 1.0f;
+    float y = analogRead(JOY_Y) / 2048.0f - 1.0f;
+    int pressed = digitalRead(JOY_SW);
+    mRelease = false;
+    if (pressed == 0) {
+        if (mPress) {
+            mPress = false;
+            mDown = true;
+            mRelease = false;
+            mClick = false;
+        } else {
+            mPress = true;
+            mDown = false;
+            mRelease = false;
+            mClick = false;
+        }
+    } else {
+        if (mPress) {
+            mPress = false;
+            mDown = false;
+            mRelease = false;
+            mClick = true;
+        } else if (mDown) {
+            mPress = false;
+            mDown = false;
+            mRelease = true;
+            mClick = false;
+        }
+    }
+
+    if (std::abs(x) > JOY_X_DEADZONE) {
+        mDX = std::floor(x);
+    } else {
+        mDX = 0;
+    }
+    if (std::abs(y) > JOY_Y_DEADZONE) {
+        mDY = std::floor(y);
+    } else {
+        mDY = 0;
+    }
+    double s = millis();
+
+    if ((std::abs(mDX) >= JOY_X_MIN_TO_SCROLL || std::abs(mDY) >= JOY_Y_MIN_TO_SCROLL) &&
+        (s - mLastScroll > MENU_RESPONSIVENESS_MS)) {
+        x = (mDX > 0 ? 1 : -1);
+        y = (mDY > 0 ? 1 : -1);
+        mLastScroll = s;
+    }
+}
+
+bool Joystick::isClick() {
+    bool res = mClick;
+    mClick = false;
+    return res;
 }

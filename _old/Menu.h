@@ -1,21 +1,20 @@
 #pragma once
-#include "Singleton.h"
 #include <vector>
 #include <Wire.h>
-#include <Display.h>
+#include "Display.h"
 
 #include "Joystick.h"
+
 class MenuPoint;
 class Menu{
     std::vector<MenuPoint*> menuPoints;
-    MenuPoint* currentMenu = 0;
     Display *display;
+    Joystick *joystick;
     std::vector<MenuPoint*> history;
     int selected = 0;
 public:
-    Menu(Display *display);
+    Menu(Display *display, Joystick *joystick);
     virtual void draw();
-    virtual void processInput(Joystick *joystick);
+    virtual void update();
     void addEntry(MenuPoint *p);
-    void back();
 };
