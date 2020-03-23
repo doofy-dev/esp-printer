@@ -16,7 +16,7 @@ void Page::setChild(Page *p) {
 
 void Page::update() {
     IClass::update();
-    if (mInput->dX() < 0 && parent != nullptr) {
+    if (mInput->x() < 0 && canGoBack()) {
         mDisplay->setPage(parent);
     }
 }

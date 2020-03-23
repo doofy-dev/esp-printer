@@ -17,11 +17,17 @@ void Menu::update() {
 
     int start = isDown ? max(currentItem - 2, 0) : max(currentItem - 1, 0);
     mDisplay->drawVerticalLine(5, HEADER_SIZE + 1, DISPLAY_HEIGHT - HEADER_SIZE - 2);
-    float dSize = (float)(DISPLAY_HEIGHT - HEADER_SIZE - 2.0);
-    float size = dSize / (float)mPageCount;
-    float currProgress = dSize * ((float)currentItem/(float)mPageCount);
+    float dSize = (float) (DISPLAY_HEIGHT - HEADER_SIZE - 2.0);
+    float size = dSize / (float) mPageCount;
+    float currProgress = dSize * ((float) currentItem / (float) mPageCount);
 
-    mDisplay->rect(2, (int)(currProgress)+1, 3, std::floor(size));
+    mDisplay->rect(2, (int) (currProgress) + 1, 3, std::floor(size));
+
+    if (mInput->isClick()) {
+        if (mPages[currentItem] != nullptr) {
+            mDisplay->setPage(mPages[currentItem]);
+        }
+    }
 
     for (int i = start, j = 0; i < min(start + 4, mPageCount); ++i, j++) {
         if (currentItem == i)

@@ -58,10 +58,12 @@ void Joystick::update() {
 
     if ((std::abs(mDX) >= JOY_X_MIN_TO_SCROLL || std::abs(mDY) >= JOY_Y_MIN_TO_SCROLL) &&
         (s - mLastScroll > MENU_RESPONSIVENESS_MS)) {
-        mX = (mDX > 0 ? 1 : -1);
-        mY = (mDY > 0 ? 1 : -1);
+        if (std::abs(mDX) >= JOY_X_MIN_TO_SCROLL)
+            mX = (mDX > 0 ? 1 : -1);
+        if (std::abs(mDY) >= JOY_Y_MIN_TO_SCROLL)
+            mY = (mDY > 0 ? 1 : -1);
         mLastScroll = s;
-    }else{
+    } else {
         mX = 0;
         mY = 0;
     }

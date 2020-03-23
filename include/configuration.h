@@ -56,7 +56,7 @@
 #define TEXT_COLOR INVERSE
 
 //IO
-#define MENU_RESPONSIVENESS_MS 200 //scroll speed milisec delay
+#define MENU_RESPONSIVENESS_MS 250 //scroll speed milisec delay
 //SD card settings
 #define SD_CONFIG_FILE "config.ini"
 #define SD_WEBUI_FOLDER "www"
