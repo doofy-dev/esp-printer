@@ -29,8 +29,8 @@
 #define DISPLAY_WIDTH 320
 #define DISPLAY_HEIGHT 64
 
-//BME280 MicroSD card reader
-#define SD_ADDRESS 0x76
+//BME280 Sensor I2C address
+#define BME280_ADDRESS 0x76
 
 
 //JOYSTICK

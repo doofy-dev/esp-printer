@@ -11,7 +11,7 @@
 
 HomePage::HomePage(Display *display, Joystick *input, String name) : Page(display, input, std::move(name)) {
     sensor = Adafruit_BME280();
-    sensor.begin(0x76);
+    sensor.begin(BME280_ADDRESS);
     sensor.setSampling(
             Adafruit_BME280::MODE_NORMAL,
             Adafruit_BME280::SAMPLING_X2,
