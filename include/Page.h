@@ -12,10 +12,12 @@ protected:
     String mName;
     Page *child{};
     Page *parent{};
+    bool disableBackButton = false;
 public:
     Page(Display *display, Joystick *input, String name);
     void setChild(Page *p);
     void setParent(Page *p);
     String getName();
+    bool canGoBack();
     void update() override;
 };

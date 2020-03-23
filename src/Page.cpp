@@ -28,3 +28,7 @@ void Page::setParent(Page *p) {
 String Page::getName() {
     return mName;
 }
+
+bool Page::canGoBack() {
+    return parent != nullptr && !disableBackButton;
+}

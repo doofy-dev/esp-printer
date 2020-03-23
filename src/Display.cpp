@@ -26,27 +26,28 @@ void Display::update() {
     mCurrentPage->beforeUpdate();
     display->clear();
     mCurrentPage->update();
-    display->drawString(0, 0, curretnPageName);
+    display->fillRect(0,0, 200, HEADER_SIZE);
+    display->setTextAlignment(TEXT_ALIGN_RIGHT);
+    display->drawString(120, 0, curretnPageName);
+    display->setTextAlignment(TEXT_ALIGN_LEFT);
+    if(mCurrentPage->canGoBack()){
+        display->drawString(0,0, "< Back");
+    }
     display->display();
     mCurrentPage->lateUpdate();
 }
 
 void Display::string(int x, int y, String data) {
-    display->drawString(x, y, std::move(data));
+    display->drawString(x, y+HEADER_SIZE, std::move(data));
 }
 
 void Display::rect(int x, int y, int width, int height) {
-    display->fillRect(x, y, width, height);
+    display->fillRect(x, y+HEADER_SIZE, width, height);
 }
 
 void Display::setPage(Page *p) {
     mCurrentPage = p;
     curretnPageName = mCurrentPage->getName();
-    int sidePadding = floor((30 - curretnPageName.length()) / 2.0);
-    for(int i=0;i<sidePadding;i++){
-        curretnPageName = "-"+curretnPageName+"-";
-    }
-
 }
 
 Page *Display::currentPage() {
@@ -55,4 +56,7 @@ Page *Display::currentPage() {
 
 void Display::lateUpdate() {
     IClass::lateUpdate();
+}
+void Display::drawVerticalLine(int x, int y, int length){
+    display->drawVerticalLine(x, y, length);
 }

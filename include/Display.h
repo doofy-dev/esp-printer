@@ -13,7 +13,7 @@ class Display : public IClass {
 private:
     OLEDDisplayUi *ui;
     SSD1306Wire *display;
-    Page *mCurrentPage;
+    Page *mCurrentPage{};
     String curretnPageName;
 public:
     Display();
@@ -31,4 +31,5 @@ public:
 
     void rect(int x, int y, int width, int height);
 
+    void drawVerticalLine(int x, int y, int length);
 };

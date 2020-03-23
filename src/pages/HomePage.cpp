@@ -28,16 +28,16 @@ void HomePage::update() {
     float press = sensor.readPressure()/1000;
     press = std::floor(press*100)/100;
 
-    mDisplay->string(10, 20, "Tmp.:");
-    mDisplay->string(40, 20, String(sensor.readTemperature()));
-    mDisplay->string(70, 20, "*C");
-    mDisplay->string(10, 30, "Pres.:");
-    mDisplay->string(40, 30, String(press));
-    mDisplay->string(80, 30, "kPa");
+    mDisplay->string(10, 0, "Tmp.:");
+    mDisplay->string(40, 0, String(sensor.readTemperature()));
+    mDisplay->string(70, 0, "*C");
+    mDisplay->string(10, 10, "Pres.:");
+    mDisplay->string(40, 10, String(press));
+    mDisplay->string(80, 10, "kPa");
 
-    mDisplay->string(10, 40, "Hum:");
-    mDisplay->string(40, 40, String(sensor.readHumidity()));
-    mDisplay->string(70, 40, "%");
+    mDisplay->string(10, 20, "Hum:");
+    mDisplay->string(40, 20, String(sensor.readHumidity()));
+    mDisplay->string(70, 20, "%");
 
     if(mInput->isClick()){
         mDisplay->setPage(child);

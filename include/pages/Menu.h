@@ -4,6 +4,8 @@
 
 class Menu : public Page {
 private:
+    int currentItem = 0;
+    bool isDown=false;
     Page **mPages;
     int mPageCount;
 public:

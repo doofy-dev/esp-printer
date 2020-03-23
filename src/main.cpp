@@ -6,6 +6,7 @@
 #include <Display.h>
 #include <pages/HomePage.h>
 #include <pages/Menu.h>
+#include <pages/Settings.h>
 
 Joystick *input;
 Display *display;
@@ -16,9 +17,13 @@ void setup() {
     Serial.begin(115200);
     input=new Joystick();
     display=new Display();
-    auto *p = new HomePage(display, input, "Homepage");
-    p->setChild(new Menu(display, input, "Main menu", 6));
+    auto p = new HomePage(display, input, "Homepage");
+    auto mainMenu = new Menu(display, input, "Main menu", 6);
+
+
+    p->setChild(mainMenu);
     display->setPage(p);
+    mainMenu->setItem(0, new Settings(display, input));
 }
 
 void loop() {

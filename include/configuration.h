@@ -50,6 +50,7 @@
 //MISC
 //FONT
 #define FONT ArialMT_Plain_10
+#define HEADER_SIZE 12
 #define FONT_SIZE 10 //equalt to the font
 #define TEXT_ALIGN TEXT_ALIGN_LEFT
 #define TEXT_COLOR INVERSE
